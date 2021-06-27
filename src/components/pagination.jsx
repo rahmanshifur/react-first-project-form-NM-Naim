@@ -31,9 +31,9 @@ class Pagination extends Component {
                     {this.state.isEditable ? (
                         <input type="number"
                             value={currentPage}
-                            onChang={(e) => handelPageChange(e.target.value)}
+                            onChange={(e) => handelPageChange(e.target.value)}
                             onKeyPress={(e) => {
-                                if (e.key = 'Enter') {
+                                if (e.key === 'Enter') {
                                     goToPage();
                                     this.setState({ isEditable: false })
                                 }

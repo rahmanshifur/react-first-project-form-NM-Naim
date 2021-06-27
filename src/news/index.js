@@ -24,7 +24,7 @@ export default class news {
     async getNews() {
         try {
             const { data } = await axios.get(this._getURL());
-            this._totalPage = Math.ceil(data._totalResults / this._pageSize);
+            this._totalPage = Math.ceil(data.totalResults / this._pageSize);
 
             return {
                 article: data.articles,
@@ -38,6 +38,7 @@ export default class news {
             }
 
         } catch (e) {
+            console.error(e)
             throw new Error(e);
         }
     }
@@ -80,7 +81,7 @@ export default class news {
     _getURL() {
         let url = '/?'
         if (this._category) url += `category=${this._category}`;
-        if (this._searchTerm) url += `&q = ${this._searchTerm}`;
+        if (this._searchTerm) url += `&q=${this._searchTerm}`;
         if (this._pageSize) url += `&pageSize=${this._pageSize}`;
         if (this._currentPage) url += `&page=${this._currentPage}`
 
@@ -92,6 +93,6 @@ export default class news {
     }
 
     _isPrevious() {
-        return this.currentPage > 1;
+        return this._currentPage > 1;
     }
 }
